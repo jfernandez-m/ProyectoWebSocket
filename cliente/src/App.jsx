@@ -35,6 +35,7 @@ function Chat({ nombre }) {
         <span className={conectado ? "estado ok" : "estado"}>
           {conectado ? "● conectado" : "○ reconectando…"}
         </span>
+        <button onClick={() => document.body.classList.toggle("oscuro")}>Modo oscuro</button>
         <small>{usuarios.length} en línea: {usuarios.join(", ")}</small>
       </header>
       <main>
