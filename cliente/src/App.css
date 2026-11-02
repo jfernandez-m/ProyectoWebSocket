@@ -19,4 +19,5 @@ button { padding:10px 18px; border:0; border-radius:8px; background:var(--acento
 button:disabled { opacity:.5; cursor:not-allowed; }
 body.oscuro { background: #101214; }
 body.oscuro .chat { filter: invert(1) hue-rotate(180deg); }
-body.oscuro .chat img { filter: invert(1) hue-rotate(180deg); }
+.avatar { width:24px; height:24px; border-radius:50%; object-fit:cover; vertical-align:middle; }
+body.oscuro .chat img { filter:invert(1) hue-rotate(180deg); }

@@ -1,11 +1,42 @@
 import { useEffect, useRef, useState } from "react";
 import { useChat } from "./useChat.js";
 
+const AVATARES = [
+  "/avatares/1.png", "/avatares/2.png", "/avatares/3.png", "/avatares/4.png", "/avatares/5.png",
+  "/avatares/6.png", "/avatares/7.png", "/avatares/8.png", "/avatares/9.png", "/avatares/10.png",
+];
+
+const COLORES = [
+  "#b71c1c", "#1b5e20", "#0d47a1", "#6a1b9a", "#bf360c",
+  "#00695c", "#ad1457", "#4e342e", "#37474f", "#827717",
+];
+
+
+const asignados = new Map();
+let disponibles = [];
+
+function avatarDe(nombre) {
+  if (!asignados.has(nombre)) {
+    if (disponibles.length === 0) disponibles = [...AVATARES];
+    const i = Math.floor(Math.random() * disponibles.length);
+    asignados.set(nombre, disponibles.splice(i, 1)[0]);
+  }
+  return asignados.get(nombre);
+}
+
+function colorDe(nombre) {
+  return COLORES[AVATARES.indexOf(avatarDe(nombre))];
+}
+
+
 function Burbuja({ nombre, texto, hora, tipo, esMio }) {
   if (tipo === "sistema") return <p className="sistema">{texto} · {hora}</p>;
   return (
     <div className={esMio ? "burbuja mia" : "burbuja"}>
-      {!esMio && <strong>{nombre}</strong>}
+      <strong style={{ color: colorDe(nombre) }}>
+        <img className="avatar" src={avatarDe(nombre)} alt="" /> {!esMio && nombre}
+      </strong>
+
       <span>{texto}</span>
       <small>{hora}</small>
     </div>
